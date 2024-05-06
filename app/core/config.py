@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     DATABASE_NAME: str
     SECRET_KEY: str
     ALGORITHM: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    ACCESS_TOKEN_EXPIRE_MINUTES:int
     
 
 settings = Settings()

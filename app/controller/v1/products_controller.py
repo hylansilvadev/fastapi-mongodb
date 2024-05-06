@@ -44,8 +44,7 @@ async def get_list_of_products(limit: int = 1000):
     '/{id}',
     response_model=ViewProduct,
     response_model_by_alias=False,
-    status_code=status.HTTP_200_OK,
-    dependencies=[Depends(sec.get_current_user)]
+    status_code=status.HTTP_200_OK
 )
 async def get_list_of_products(id: str):
         request = await product_service.find_product_by_id(id)
@@ -62,3 +61,24 @@ async def get_list_of_products(id: str):
 async def update_product_by_id(id: str, product:Product):
     request = await product_service.update_product_by_id(id, product)
     return request
+
+
+@router.patch(
+    '/{id}',
+    response_model=ViewProduct,
+    response_model_by_alias=False,
+    status_code=status.HTTP_200_OK,
+    dependencies=[Depends(sec.get_current_user)]
+)
+async def pop_porduct_off_the_storage_by_id(id: str, quantity:int):
+    request = await product_service.pop_porduct_off_the_storage(id, quantity)
+    return request
+
+
+@router.delete(
+    '/{id}',
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(sec.get_current_user)]
+)
+async def delete_product_by_id(id: str):
+    await product_service.delete_product_by_id(id)
